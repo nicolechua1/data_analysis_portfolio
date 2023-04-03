@@ -28,36 +28,52 @@ from covid_deaths cd
 order by 1,2;
 
 -- Country with the highest infection rates
+-- third visualization
 
 select location, population, max(total_cases) as HighestInfectionCount, max(total_cases/cast(population  as float))*100 as PercentPopulationInfected
 from covid_deaths cd 
-group by location, population
+--where continent !=''
+group by location, population 
 order by PercentPopulationInfected desc;
+
+
+-- infection rates with date
+--fourth visualization
+
+select location, population, date, max(total_cases) as HighestInfectionCount, max(total_cases/cast(population  as float))*100 as PercentPopulationInfected
+from covid_deaths cd 
+group by location, population, date
+order by location, date, PercentPopulationInfected desc;
 
 -- Country with the highest death count per population
 
-select location, max(total_deaths) as TotalDeathCount
+select continent, location, max(total_deaths) as TotalDeathCount
 from covid_deaths cd 
-where continent !='' and continent is not null
-group by location
+where continent !='' and continent is not null 
+group by location, continent 
 order by TotalDeathCount desc;
 
 -- Continent with the highest death count
+-- second visualization
 
 select location, max(total_deaths) as TotalDeathCount
 from covid_deaths cd 
-where continent = ''
+where continent = '' 
+and location not in ('World', 'High income', 'Upper middle income', 'Lower middle income', 
+'European Union', 'Low income')
 group by location
 order by TotalDeathCount desc;
 
 -- Global numbers
+-- first visualization
 
-select sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, sum(new_deaths)/cast(nullif(sum(new_cases),0) as float)*100 as DeathPercentage
+select sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, sum(new_deaths)/cast(nullif(sum(new_cases),0) as float)*100 as death_percentage
 from covid_deaths cd 
 -- where location like '%Singapore%'
 where continent !=''
 -- group by date
-order by 1;
+--order by 1;
+
 
 -- Vaccination percentage
 -- cumulative vaccination numbers
@@ -110,8 +126,7 @@ from PopvsVac
 --where continent !=''
 group by location, population
 
--- above code has an issue. More vaccinations than actual people. could be due to 
--- the new_vaccinations tracking multiple vaccinations per person.
+-- new_vaccinations is tracking multiple vaccinations per person.
 
 
 -- Temp table 
