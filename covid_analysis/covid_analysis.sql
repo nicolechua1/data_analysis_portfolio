@@ -130,8 +130,7 @@ group by location, population
 
 
 -- Temp table 
--- change table name because it is not actually a count of people vaccinated
--- but a count of vaccinations administered
+-- not a count of people vaccinated but a count of vaccinations administered
 drop table if exists PercentPopulationVacc
 create temporary table PercentPopulationVacc
 (
