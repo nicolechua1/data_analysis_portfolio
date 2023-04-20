@@ -7,4 +7,4 @@ List of projects:
 
 2. Data cleaning -- Cleaned Nashville housing data with SQL. Standardized date format, populated missing address data, split full address into columns with substring & split_part, fixed inconsistent data fields, removed duplicates and deleted unused columns in cleaned dataset.
 
-3. Movie Industry Correlations Analysis -- Conducting correlations analysis on Movie Industry data using Python (pandas, numpy, seaborn, matplotlib).
+3. Movie Industry Correlations Analysis -- Conducted correlations analysis on Movie Industry data using Python (pandas, numpy, seaborn, matplotlib) & observed what variables have an effect on gross revenue from Movies.
